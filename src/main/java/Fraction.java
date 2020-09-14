@@ -75,14 +75,4 @@ public class Fraction implements IFraction {
     public String toString() {
         return "Fraction " + numerator + "|" + denominator;
     }
-
-    public static void main(String[] args) {
-        Fraction fraction1 = new Fraction(1, 2);
-        Fraction fraction2 = new Fraction(1, 2);
-
-        System.out.println(fraction1.plus(fraction2).getNumerator() + "|" + fraction1.plus(fraction2).getDenominator());
-        System.out.println(fraction1.minus(fraction2).getNumerator() + "|" + fraction1.minus(fraction2).getDenominator());
-        System.out.println(createNormalised(5, 1071).getNumerator() + "|" + createNormalised(5, 1071).getDenominator());
-
-    }
 }
