@@ -22,34 +22,53 @@ public class Fraction implements IFraction {
 
     @Override
     public IFraction plus(IFraction other) {
-        int lowestCommonMultiple = findLowestCommonMultiple(getDenominator(), other.getDenominator());
-        int numerator1 = lowestCommonMultiple / denominator * numerator;
-        int numerator2 = lowestCommonMultiple / other.getDenominator() * other.getNumerator();
+        int lcm = lcm(getDenominator(), other.getDenominator());
+        int n1 = lcm / denominator * numerator;
+        int n2 = lcm / other.getDenominator() * other.getNumerator();
 
-        return new Fraction(numerator1 + numerator2, lowestCommonMultiple);
+        return createNormalised(n1 + n2, lcm);
     }
 
     @Override
     public IFraction minus(IFraction other) {
-        int lowestCommonMultiple = findLowestCommonMultiple(getDenominator(), other.getDenominator());
-        int numerator1 = lowestCommonMultiple / denominator * numerator;
-        int numerator2 = lowestCommonMultiple / other.getDenominator() * other.getNumerator();
+        int lcm = lcm(getDenominator(), other.getDenominator());
+        int n1 = lcm / denominator * numerator;
+        int n2 = lcm / other.getDenominator() * other.getNumerator();
 
-        return new Fraction(numerator1 - numerator2, lowestCommonMultiple);
+        return createNormalised(n1 - n2, lcm);
     }
 
     @Override
     public IFraction times(IFraction other) {
-        throw new UnsupportedOperationException();
+        int timesNumerator = numerator * other.getNumerator();
+        int timesDenominator = denominator * other.getDenominator();
+
+        return createNormalised(timesNumerator, timesDenominator);
     }
 
     @Override
     public IFraction dividedBy(IFraction other) {
-        throw new UnsupportedOperationException();
+        int timesNumerator = numerator * other.getDenominator();
+        int timesDenominator = denominator * other.getNumerator();
+
+        return createNormalised(timesNumerator, timesDenominator);
     }
 
-    public static Fraction createNormalised(Integer numerator, Integer denominator) {
-        throw new UnsupportedOperationException();
+    private static Fraction createNormalised(int numerator, int denominator) {
+        int gcd = gcd(numerator, denominator);
+        return new Fraction(numerator / gcd, denominator / gcd);
+    }
+
+    private static Integer gcd(Integer i1, Integer i2) {
+        return i2 == 0 ? i1 : gcd(i2, i1 % i2);
+    }
+
+    private static Integer lcm(Integer i1, Integer i2) {
+        if (i1 == 0 || i2 == 0) return 0;
+        else {
+            int gcd = gcd(i1, i2);
+            return Math.abs(i1 * i2) / gcd;
+        }
     }
 
     @Override
@@ -57,26 +76,13 @@ public class Fraction implements IFraction {
         return "Fraction " + numerator + "|" + denominator;
     }
 
-    private static Integer findGreatestCommonDenominator(Integer i1, Integer i2) {
-        if (i1 < i2) return findGreatestCommonDenominator(i2, i1);
-        if (i2 == 0) return i1;
-        return findGreatestCommonDenominator(i2, i1 % i2);
-    }
-
-    private static Integer findLowestCommonMultiple(Integer i1, Integer i2) {
-        if (i1 == 0 || i2 == 0) return 0;
-        else {
-            int gcd = findGreatestCommonDenominator(i1, i2);
-            return Math.abs(i1 * i2) / gcd;
-        }
-    }
-
     public static void main(String[] args) {
-        Fraction fraction1 = new Fraction(2, 3);
-        Fraction fraction2 = new Fraction(3, 2);
+        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction2 = new Fraction(1, 2);
 
         System.out.println(fraction1.plus(fraction2).getNumerator() + "|" + fraction1.plus(fraction2).getDenominator());
         System.out.println(fraction1.minus(fraction2).getNumerator() + "|" + fraction1.minus(fraction2).getDenominator());
+        System.out.println(createNormalised(5, 1071).getNumerator() + "|" + createNormalised(5, 1071).getDenominator());
 
     }
 }
