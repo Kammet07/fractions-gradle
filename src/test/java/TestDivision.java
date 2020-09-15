@@ -6,11 +6,11 @@ public class TestDivision {
 
     @Test
     public void testDividedBySimple() {
-        var fraction = TestUtils.createFraction(12, 7);
-        var result = fraction.dividedBy(new NotImplementedFraction(6, 11));
+        var fraction = TestUtils.createFraction(4, 1);
+        var result = fraction.dividedBy(new NotImplementedFraction(3, 1));
 
-        Assert.assertEquals((Integer) 22, result.getNumerator());
-        Assert.assertEquals((Integer) 7, result.getDenominator());
+        Assert.assertEquals((Integer) 4, result.getNumerator());
+        Assert.assertEquals((Integer) 3, result.getDenominator());
     }
 
     @Test
