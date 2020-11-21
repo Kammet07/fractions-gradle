@@ -1,37 +1,37 @@
-
-public interface IFraction {
+interface IFraction {
 
     /**
      * @return the upper part of the fraction
      */
-    Integer getNumerator();
+    val numerator: Int
 
     /**
      * @return the bottom part of the fraction
      */
-    Integer getDenominator();
+    val denominator: Int
 
     /**
      * @param other fraction
      * @return new instance of IFraction representing the result
      */
-    IFraction plus(IFraction other);
+    operator fun plus(other: IFraction): IFraction
 
     /**
      * @param other fraction
      * @return new instance of IFraction representing the result
      */
-    IFraction minus(IFraction other);
+    operator fun minus(other: IFraction): IFraction
 
     /**
      * @param other fraction
      * @return new instance of IFraction representing the result
      */
-    IFraction times(IFraction other);
+    operator fun times(other: IFraction): IFraction
 
     /**
      * @param other fraction
      * @return new instance of IFraction representing the result
      */
-    IFraction dividedBy(IFraction other);
+    fun dividedBy(other: IFraction): IFraction
 }
+
