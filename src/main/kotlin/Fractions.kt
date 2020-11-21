@@ -22,7 +22,7 @@ class Fraction(override val numerator: Int, override val denominator: Int) : IFr
         return createNormalised(timesNumerator, timesDenominator)
     }
 
-    override fun dividedBy(other: IFraction): IFraction {
+    override operator fun div(other: IFraction): IFraction {
         val timesNumerator: Int = numerator * other.denominator
         val timesDenominator: Int = denominator * other.numerator
         return createNormalised(timesNumerator, timesDenominator)

@@ -12,7 +12,7 @@ class NotImplementedFraction(override val numerator: Int, override val denominat
         throw UnsupportedOperationException()
     }
 
-    override fun dividedBy(other: IFraction): IFraction {
+    override fun div(other: IFraction): IFraction {
         throw UnsupportedOperationException()
     }
 }

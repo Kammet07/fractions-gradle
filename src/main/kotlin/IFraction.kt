@@ -32,6 +32,6 @@ interface IFraction {
      * @param other fraction
      * @return new instance of IFraction representing the result
      */
-    fun dividedBy(other: IFraction): IFraction
+    operator fun div(other: IFraction): IFraction
 }
 
